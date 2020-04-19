@@ -35,57 +35,27 @@ class TransactionList extends StatelessWidget {
                 itemCount: userTransactions.length,
                 itemBuilder: (ctx, index) {
                   return Card(
-                      child: Row(
-                    children: <Widget>[
-                      Container(
-                        width: 100,
-                        alignment: Alignment.center,
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          color: Theme.of(context).primaryColor,
-                          width: 2,
-                        )),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          '\$${userTransactions[index].amount.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
+                    margin: EdgeInsets.all(5),
+                    elevation: 5,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: FittedBox(
+                            child: Text(
+                                '\$${userTransactions[index].amount.toStringAsFixed(2)}'),
                           ),
                         ),
                       ),
-                      Column(
-                        // position y
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 5,
-                            ),
-                            // ====================== TITLE ======================
-                            child: Text(
-                              userTransactions[index].title,
-                              style: Theme.of(context).textTheme.title,
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                          Text(
-                            // format data with dateFormat plugin
-                            DateFormat('yyyy/MM/dd')
-                                .format(userTransactions[index].date),
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ));
+                      title: Text(
+                        userTransactions[index].title,
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      subtitle: Text(DateFormat('yyyy/MM/dd')
+                          .format(userTransactions[index].date)),
+                    ),
+                  );
                 }));
   }
 }
