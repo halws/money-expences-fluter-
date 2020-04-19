@@ -14,8 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter App',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        accentColor: Colors.amber,
+        fontFamily: 'QuickSand',
+        primarySwatch: Colors.orange,
+        accentColor: Colors.indigo,
         textTheme: ThemeData.light().textTheme.copyWith(
             title: TextStyle(
               fontFamily: 'OpenSans',
@@ -33,7 +34,6 @@ class MyApp extends StatelessWidget {
                 ),
               ),
         ),
-        fontFamily: 'QuickSand',
       ),
       home: MyHomePage(),
     );
@@ -49,12 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
-  final List<Transaction> _userTransactions = [
-    // Transaction(
-    //     id: 't1', title: 'New Shoes', amount: 10.2, date: DateTime.now()),
-    // Transaction(
-    //     id: 't2', title: 'Groceries', amount: 120.2, date: DateTime.now()),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -89,6 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+// remove transaction by index
+  void _deleteTransaction(int index) {
+    setState(() {
+      _userTransactions.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction),
           ],
         ));
   }

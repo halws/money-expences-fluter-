@@ -30,7 +30,7 @@ class _NewTransactionState extends State<NewTransaction> {
     final enteredAmount = double.parse(_amountController.text);
 
     // check if all data are filled
-    if (enteredTitle.isEmpty || enteredAmount <= 0 && _selectedDate == null) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
